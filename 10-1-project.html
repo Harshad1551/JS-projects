@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amazon Shipping Calculator</title>
+
+    <style>
+        .Subscribe{
+        background-color: rgb(228, 221, 221);
+        border-radius: 6px;
+        border: none;
+        text-align:center;
+        width: auto;
+        height: 2em;
+        position: relative;
+        left: 5px;
+        color: brown;
+        font-weight: 700;
+        cursor: pointer;
+        }
+        .Subscribe:hover{
+            
+        background-color: rgb(197, 192, 192);
+        box-shadow: 1.5px 1px 5px black;
+        }
+        .isSubscribed{
+            background-color: rgb(197, 192, 192);
+            box-shadow: 1.5px 1px 5px black;
+        }
+        .notSubscribed{
+            background-color: rgb(228, 221, 221);
+        border-radius: 6px;
+        border: none;
+        text-align:center;
+        width: auto;
+        height: 2em;
+        position: relative;
+        left: 5px;
+        color: brown;
+        font-weight: 700;
+        cursor: pointer;
+        box-shadow: none;
+        }
+        body{
+            background-color: azure;
+            position: absolute;
+            left: 15em;
+            top: 15em;
+     font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        input::placeholder{
+            font-family:'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+        }
+        .calculate{
+        background-color: rgb(228, 221, 221);
+        border-radius: 6px;
+        border: none;
+        text-align:center;
+        width: auto;
+        height: 2em;
+        position: relative;
+        left: 5px;
+        color: brown;
+        font-weight: 700;
+        cursor: pointer;
+        }
+        .calculate:hover{
+            background-color: rgb(197, 192, 192);
+        box-shadow: 1.5px 1px 5px black;
+        }
+
+    </style>
+
+</head>
+<body>
+    <p>Amazon Shipping Calculator </p>
+
+    <p>Orders Under $40 = +$10</p>
+    <p>Orders Under $40 = FREE Shipping</p>
+
+    <input placeholder="cost of order" class="cost" onkeydown="
+    if(event.key === 'Enter'){
+        calculate();
+    }
+    ">
+    <button class="calculate" onclick="
+    calculate();
+    ">calculate</button>
+    <p class="output"></p>
+    <p>YouTube Subscribe Button</p>
+    <button class="Subscribe" onclick="
+    Change();
+    ">Subscribe</button>
+    <script>
+ function calculate(){
+  const input =  document.querySelector('.cost');
+ let cost = Number(input.value);
+//console.log(cost);
+    if(cost < 40 && cost != 0)
+ {
+    cost = cost + 10;
+  //  console.log(cost);
+ }
+ else if(cost === 0){
+    cost = 0;
+ }
+ document.querySelector('.output').textContent = `Total cost :$${cost}` ;
+ }
+
+ let buttonChanged = document.querySelector('.Subscribe');
+
+function Change(){
+    if (buttonChanged.innerHTML === 'Subscribe'){
+    buttonChanged.innerHTML = 'Subscribed';
+    buttonChanged.classList.add('isSubscribed');
+    }
+    else{
+        buttonChanged.innerHTML = 'Subscribe';
+        buttonChanged.classList.add('notSubscribed');
+    }
+}
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>To-Do List</title>
+    <style>
+        body{
+            font-family: Georgia, 'Times New Roman', Times, serif;
+            
+        }
+  
+        .main-output,.main-input{
+            color:rgb(233, 49, 49);
+            font-size: 20px;
+            font-weight: 600;
+            display: grid;
+            grid-template-columns: 150px 150px 100px;
+            column-gap: 10px;
+            margin-bottom:10px;
+        }
+        .task{
+            border-radius: 2px;
+        }
+        
+        .date{
+            border-radius: 2px;
+        }
+
+        .add{
+            background-color: rgb(224, 46, 46);
+            border: none;
+            border-radius: 5px;
+        }
+        .delete{
+            background-color: gainsboro;
+            border: none;
+            padding: 5px;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+    <h4>To-Do List</h4>
+    <div class="main-input" >
+    <input class="task" placeholder="Enter your task"  
+    onkeydown="  
+    if(event.key =='Enter')
+    {
+        AddTask();
+        OnWeb();  
+    }">
+    <input type="date" class="date">
+    <button class="add" onclick="AddTask();
+">Add</button>
+</div>
+   <div class="display"></div>
+
+    <script>
+        const ToDo = JSON.parse(localStorage.getItem('ToDo'))||[{
+            name:'college',
+            dueDate: '12-09-2024'
+        }];
+        
+        function AddTask(){
+        const inputname = document.querySelector('.task');
+        const name = inputname.value;
+        const inputdate = document.querySelector('.date');
+        const dueDate = inputdate.value;
+            ToDo.push({//name2:name2,
+                        //dueDate:date2
+                        name,// Shorthand property to avoid above step
+                        dueDate // the name should be same as object's property name
+            });
+           // console.log(ToDo);
+            name.value = '';
+            OnWeb();
+        saveLocalStorage();
+        }
+        function OnWeb(){
+            let ToDoHTML = '';
+        document.querySelector('.display').innerHTML = ToDoHTML;
+        for(let i=0;i<ToDo.length;i++){
+            const TodoObject = ToDo[i];
+            const {name,dueDate} = TodoObject;// Destructing
+            const save = `<div class="main-output">
+                            <div>${name}</div>  
+                            <div>${dueDate}</div>
+                        <button onclick="
+                           ToDo.splice(${i},1);
+                            OnWeb();
+                        " class="delete">Delete</button>
+                           </div> 
+                        `;
+          //S  console.log(save);
+            ToDoHTML += save;
+           // console.log(ToDoHTML);
+           document.querySelector('.display').innerHTML = ToDoHTML;
+        }
+        
+       saveLocalStorage();
+        }
+
+        function saveLocalStorage(){
+          localStorage.setItem('ToDo',JSON.stringify(ToDo));//to store object in localStorage by using json ani making it string as json only supports string
+
+        }
+    </script>
+</body>
+</html>
