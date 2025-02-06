@@ -37,13 +37,13 @@
         height: 2em;
         position: relative;
         left: 5px;
-        color: brown;
+        color: rgb(194, 0, 0);
         font-weight: 700;
         cursor: pointer;
         box-shadow: none;
         }
         body{
-            background-color: azure;
+            background-color: #d3f1f1;
             position: absolute;
             left: 15em;
             top: 15em;
@@ -76,22 +76,16 @@
 <body>
     <p>Amazon Shipping Calculator</p>
 
-    <p>Orders Under $40 = +$10</p>
-    <p>Orders Under $40 = FREE Shipping delivery</p>
+    <p>Orders Under $40 = +$20</p>
+    <p>Orders Under $40 = FREE Shipping </p>
 
-    <input placeholder="cost of order" class="cost" onkeydown="
-    if(event.key === 'Enter'){
-        calculate();
-    }
-    ">
+    <input placeholder="cost of order" class="cost">
     <button class="calculate" onclick="
     calculate();
     ">calculate</button>
     <p class="output"></p>
     <p>YouTube Subscribe Button</p>
-    <button class="Subscribe" onclick="
-    Change();
-    ">Subscribe</button>
+    <button class="Subscribe" onclick="Change();">Subscribe</button>
     <script>
  function calculate(){
   const input =  document.querySelector('.cost');
@@ -108,6 +102,11 @@
  document.querySelector('.output').textContent = `Total cost :$${cost}` ;
  }
 
+ document.body.addEventListener('keydown',(event)=>{
+            if(event.key === 'Enter'){
+                calculate();
+            }
+ });
  let buttonChanged = document.querySelector('.Subscribe');
 
 function Change(){
